@@ -1,11 +1,44 @@
 #! /usr/bin/env node
-
-var ACME = '/home/wallet/public_html/.well-known/acme-challenge';
-var HOME = './ssl';
-var domains = [ 'wallet.nchain.ir' ];
-
+var args = require('args');
 var G_LOCK = require('greenlock');
 var mkdirp = require('mkdirp');
+var fs = require('fs');
+
+args.option(
+	'conf', 
+	'Path to config file (defaults to /etc/letsencrypt-bot/config.json or ~/.letsencrypt-bot.json)'
+);
+var opt = args.parse(process.argv);
+
+var config;
+
+try {
+	if (opt.conf) {
+		config = JSON.parse(fs.readFileSync(opt.conf,'utf8'));
+	}
+}
+catch {
+	try {
+		config = JSON.parse(fs.readFileSync('/etc/letsencrypt-bot/config.json','utf8'))
+	}
+	catch {
+		try {
+			config = JSON.parse(fs.readFileSync('~/.letsencrypt-bot.json','utf8'))
+		}
+		catch {
+			console.error('ERROR: Cannot find config file!');
+			process.exit();
+		}
+	}
+}
+
+// var ACME = '/home/wallet/public_html/.well-known/acme-challenge';
+// var HOME = './ssl';
+// var domains = [ 'wallet.nchain.ir' ];
+
+var ACME = config.acme;
+var HOME = config.workdir;
+var domains = config.domains;
 
 var store = require('le-store-certbot').create({
 		configDir: HOME,
