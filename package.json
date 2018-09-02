@@ -2,9 +2,10 @@
   "name": "letsencrypt-test",
   "version": "1.0.0",
   "description": "Simple script to download free SSL cert",
-  "main": "letsencrypt-test.js",
+  "main": "letsencrypt-bot",
   "repository": "https://github.com/blocklime/letsencrypt-test.git",
   "dependencies": {
+    "args": "^5.0.0",
     "greenlock": "^2.4.2",
     "mkdirp": "^0.5.1"
   },
@@ -12,7 +13,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "letsencrypt-bot": "./letsencrypt-bot"
+  },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "author": "Blocklime Technologies Sdn. Bhd.",
+  "license": "BSD-2-Clause"
 }
