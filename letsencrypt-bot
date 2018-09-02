@@ -17,15 +17,15 @@ try {
 		config = JSON.parse(fs.readFileSync(opt.conf,'utf8'));
 	}
 }
-catch {
+catch (e) {
 	try {
 		config = JSON.parse(fs.readFileSync('/etc/letsencrypt-bot/config.json','utf8'))
 	}
-	catch {
+	catch (e) {
 		try {
 			config = JSON.parse(fs.readFileSync('~/.letsencrypt-bot.json','utf8'))
 		}
-		catch {
+		catch (e) {
 			console.error('ERROR: Cannot find config file!');
 			process.exit();
 		}
