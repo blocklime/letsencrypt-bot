@@ -3,6 +3,7 @@ var args = require('args');
 var G_LOCK = require('greenlock');
 var mkdirp = require('mkdirp');
 var fs = require('fs');
+var os = require('os');
 
 args.option(
 	'conf', 
@@ -10,31 +11,37 @@ args.option(
 );
 var opt = args.parse(process.argv);
 
-var config;
+var rawconfig = '-';
 
-try {
-	if (opt.conf) {
-		config = JSON.parse(fs.readFileSync(opt.conf,'utf8'));
-	}
+function die (message) {
+	console.error('ERROR: ' + message);
+	process.exit();
 }
-catch (e) {
+
+if (opt.conf) {
 	try {
-		config = JSON.parse(fs.readFileSync('/etc/letsencrypt-bot/config.json','utf8'))
+		rawconfig = fs.readFileSync(opt.conf,'utf8');
 	}
 	catch (e) {
+		die('Unable to open ' + opt.conf);
+	}
+}
+else {
+	try {
+		rawconfig = fs.readFileSync('/etc/letsencrypt-bot/config.json','utf8');
+	}
+	catch (e) {
+		console.log('Unable to read global config file, trying local config..');
 		try {
-			config = JSON.parse(fs.readFileSync('~/.letsencrypt-bot.json','utf8'))
+			rawconfig = fs.readFileSync(os.homedir() + '/.letsencrypt-bot.json','utf8');
 		}
 		catch (e) {
-			console.error('ERROR: Cannot find config file!');
-			process.exit();
+			die('Cannot find config file!');
 		}
 	}
 }
 
-// var ACME = '/home/wallet/public_html/.well-known/acme-challenge';
-// var HOME = './ssl';
-// var domains = [ 'wallet.nchain.ir' ];
+var config = JSON.parse(rawconfig);
 
 var ACME = config.acme;
 var HOME = config.workdir;
