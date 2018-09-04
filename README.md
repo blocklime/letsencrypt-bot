@@ -3,6 +3,8 @@ Letsencrypt-bot
 
 ### Simple letsencrypt script - can be used with cron
 
+![logo](https://github.com/blocklime/letsencrypt-bot/raw/master/bot.png)
+
 ## Installation
 
 Just install with npm:
