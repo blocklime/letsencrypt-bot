@@ -1,5 +1,5 @@
 {
-  "name": "letsencrypt-bot",
+  "name": "@blocklime/letsencrypt-bot",
   "version": "1.0.3",
   "description": "Simple script to download free SSL cert",
   "main": "letsencrypt-bot",
