@@ -1,6 +1,6 @@
 {
   "name": "letsencrypt-bot",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple script to download free SSL cert",
   "main": "letsencrypt-bot",
   "repository": "https://github.com/blocklime/letsencrypt-bot.git",
