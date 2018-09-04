@@ -5,6 +5,8 @@ Letsencrypt-bot
 
 ![logo](https://github.com/blocklime/letsencrypt-bot/raw/master/bot.png)
 
+Built on [Greenlock](https://www.npmjs.com/package/greenlock)!
+
 ## Installation
 
 Just install with npm:
