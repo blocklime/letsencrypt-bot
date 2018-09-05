@@ -72,3 +72,32 @@ state of the letsencrypt service and to download the ssl certificates.
 
 Once letsencrypt-bot successfully downloads the certificates you may configure
 your web server to load the certificates from the `workdir`.
+
+The structure of the `workdir` is as follows:
+
+
+    /path/to/workdir
+    ├── accounts
+    ├── archive
+    ├── live
+    ├── renewal
+    ├── ssl.crt
+    │   └── your.domain.com.crt
+    ├── ssl.key
+    │   └── your.domain.com.key
+    ├── your.domain.com.ca_bundle
+    └── your.domain.com.full_ca_bundle
+
+
+Notice that all generated files are named after the domain you registered.
+
+#### Nginx setup
+
+For Nginx, set your `ssl_certificate` to `your.domain.com.full_ca_bundle`.
+Then set your `ssl_certificate_key` to `ssl.key/your.domain.com.key`.
+
+#### Apache setup
+
+For Apache set your `SSLCertificateFile` to `ssl.crt/your.domain.com.crt` and
+your `SSLCertificateChainFile` to `your.domain.com.ca_bundle`.
+Then set your `SSLCertificateKeyFile` to `ssl.key/your.domain.com.key`.
