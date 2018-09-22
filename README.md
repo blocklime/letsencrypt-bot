@@ -15,7 +15,7 @@ Just install with npm:
 
 ## Usage
 
-	letsencrypt bot [options] [command]
+	letsencrypt-bot [options] [command]
   
 Commands:
 
