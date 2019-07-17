@@ -1,12 +1,12 @@
 {
   "name": "letsencrypt-bot",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Simple script to download free SSL cert",
   "main": "letsencrypt-bot",
   "repository": "https://github.com/blocklime/letsencrypt-bot.git",
   "dependencies": {
-    "args": "^5.0.0",
-    "greenlock": "^2.4.2",
+    "args": "^5.0.1",
+    "greenlock": "^2.8.2",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {},
@@ -16,7 +16,11 @@
   "bin": {
     "letsencrypt-bot": "./letsencrypt-bot"
   },
-  "keywords": ["letsencrypt","ssl","tls"],
+  "keywords": [
+    "letsencrypt",
+    "ssl",
+    "tls"
+  ],
   "author": "Blocklime Technologies Sdn. Bhd.",
   "license": "BSD-2-Clause"
 }
