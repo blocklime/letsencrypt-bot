@@ -46,6 +46,7 @@ var config = JSON.parse(rawconfig);
 var ACME = config.acme;
 var HOME = config.workdir;
 var domains = config.domains;
+var email = config.email || 'letsencrypt.bot@mailinator.com';
 
 var store = require('le-store-certbot').create({
 		configDir: HOME,
@@ -76,18 +77,33 @@ var greenlock = G_LOCK.create({
 
 mkdirp.sync(HOME + '/ssl.key');
 mkdirp.sync(HOME + '/ssl.crt');
-greenlock.check({ domains: domains })
-	.then(ok => {
-		if (ok) return;
-		
-		greenlock.register({
-			domains: domains,
-			email: 'amouha@visionsoba.com',
-			agreeTos: true,
-			rsaKeySize: 2048,
-			challengeType: 'http-01'
-		})
-		.then(() => console.log('success'))
-		.catch(err => console.error(err));
-	});
+
+function checkDomains (allDomains) {
+	if (!allDomains.length) return;
 	
+	var domain = allDomains.shift();
+	
+	greenlock.check({ domains: [ domain ] })
+		.then(ok => {
+			if (ok) {
+				console.log(domain + ' is still fresh');
+				return checkDomains(allDomains);
+			}
+			
+			greenlock.register({
+				domains: [ domain ],
+				email: email,
+				agreeTos: true,
+				rsaKeySize: 2048,
+				challengeType: 'http-01'
+			})
+			.then(() => {
+				console.log(domain + ' successfully registered');
+				checkDomains(allDomains);
+			})
+			.catch(err => console.error(err));
+		});
+		
+}
+
+checkDomains(domains);

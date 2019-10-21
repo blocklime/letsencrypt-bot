@@ -1,12 +1,12 @@
 {
   "name": "letsencrypt-bot",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "Simple script to download free SSL cert",
   "main": "letsencrypt-bot",
   "repository": "https://github.com/blocklime/letsencrypt-bot.git",
   "dependencies": {
     "args": "^5.0.1",
-    "greenlock": "^2.8.2",
+    "greenlock": "^2.8.8",
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {},

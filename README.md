@@ -43,6 +43,7 @@ The format of the config file is as follows:
     {
         "acme" : "/path/to/.well-known/acme-challenge",
         "workdir" : "/path/to/ssl/directory",
+        "email" : "your@email.com",
         "domains" : [ "your.domain.com", "domain2.com" ]
     }
 
